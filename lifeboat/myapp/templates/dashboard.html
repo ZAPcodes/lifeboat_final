@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Data</title>
+    <style>
+        /* Basic styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #007bff;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            padding: 12px 18px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #007bff;
+            border-radius: 5px;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .navbar button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .navbar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Dark mode styles */
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .dark-mode .navbar {
+            background-color: #333;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .dark-mode .navbar a {
+            color: #ffffff;
+        }
+
+        .dark-mode .navbar button {
+            background-color: #007bff;
+        }
+
+        /* Card layout styles */
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 30px;
+            width: 350px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .card p {
+            margin: 10px 0;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .card p strong {
+            color: #007bff;
+        }
+
+        .timestamp {
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .dark-mode .card h2 {
+            color: #84c8ff;
+        }
+
+        .dark-mode .card p strong {
+            color: #84c8ff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div>
+            <a href="#">Home</a>
+            <a href="#">Settings</a>
+        </div>
+        <button onclick="toggleDarkMode()">Light/Dark Mode</button>
+    </div>
+
+    <h1>Latest Sensor Data</h1>
+
+    <!-- Card Container -->
+    <div class="container">
+        {% for entry in data %}
+        <div class="card">
+            <h2>Bhoomi Thakwani</h2>
+            <p><strong>Heart Rate:</strong> {{ entry.heart_rate }} bpm</p>
+            <p><strong>SpO2:</strong> {{ entry.spo2 }} %</p>
+            <!-- <p><strong>Body Temperature:</strong> {{ entry.body_temp }} °C</p> -->
+            <p class="timestamp">Timestamp: {{ entry.timestamp }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Function to toggle dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+
+</body>
+</html>

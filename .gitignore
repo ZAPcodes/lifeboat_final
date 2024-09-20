@@ -1,0 +1,56 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+.env
+
+# Django migrations
+*/migrations/*.py
+*/migrations/*.pyc
+
+# Static files
+/static/
+media/
+
+# Database files
+*.sqlite3
+
+# Environment variables
+.env
+
+# IDE files
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+.idea/
+.vscode/
+
+# Log files
+*.log
+
+# Coverage reports
+coverage/
+*.cover
+
+# Test output
+test_results/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# MyPy
+.mypy_cache/
+
+# Pytest
+.pytest_cache/
+
+# Egg and distribution files
+*.egg-info/
+dist/
+build/
