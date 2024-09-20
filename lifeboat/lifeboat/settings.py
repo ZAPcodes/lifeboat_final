@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lifeboat.myapp.apps.MyappConfig',
+    'myapp.apps.MyappConfig',  # Use the AppConfig class
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
