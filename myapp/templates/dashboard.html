@@ -161,12 +161,14 @@
 
     <!-- Card Container -->
     <div class="container">
-        {% for entry in data %}
-        <div class="card">
+        <div id="sensor-data" class="card">
             <h2>Bhoomi Thakwani</h2>
-            <p><strong>Heart Rate:</strong> {{ entry.heart_rate }} bpm</p>
+            {% if data %}
+            <p><strong>Heart Rate:</strong> {{ data.heart_rate }} bpm</p>
+            {% else %}
+            <p>No data available yet.</p>
+            {% endif %}
         </div>
-        {% endfor %}
     </div>
 
     <script>
@@ -174,6 +176,18 @@
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
         }
+
+        setInterval(function() {
+            // Fetch the latest data via AJAX
+            fetch(window.location.href)
+                .then(response => response.text())
+                .then(html => {
+                    // Replace the content inside the #sensor-data div with new data
+                    document.getElementById('sensor-data').innerHTML = new DOMParser()
+                        .parseFromString(html, 'text/html')
+                        .getElementById('sensor-data').innerHTML;
+                });
+        }, 30000);  // 30 seconds interval
     </script>
 
 </body>
