@@ -25,6 +25,8 @@ def receive_data(request):
 def display_data(request):
     # Retrieve the heart rate data from the session
     sensor_data = request.session.get('sensor_data', None)
+    print(sensor_data)
+
 
     # Render the data to a template (or display a message if no data is available)
     return render(request, 'dashboard.html', {'data': sensor_data})
