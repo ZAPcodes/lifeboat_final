@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'lifeboat.urls'
+ROOT_URLCONF = 'lifeboat.lifeboat.urls'
 
 TEMPLATES = [
     {
