@@ -30,4 +30,4 @@ def display_data(request):
     sensor_data = request.session.get('sensor_data', None)
 
     # Render the data to a template (or display a message if no data is available)
-    return render(request, 'sensor_data.html', {'data': sensor_data})
+    return render(request, 'dashboard.html', {'data': sensor_data})
