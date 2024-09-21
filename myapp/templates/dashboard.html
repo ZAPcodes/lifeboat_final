@@ -189,9 +189,9 @@
 
         setInterval(function() {
             // Fetch the latest data via AJAX
-            fetch(window.location.href)
-                .then(response => response.text())  // Assuming the server returns JSON data
-                .then(html => {
+            fetch(window.location.href) // Adjust the endpoint if needed
+                .then(response => response.json())  // Parse response as JSON
+                .then(data => {
                     // Update heart rate value
                     const heartRateElement = document.getElementById('heart-rate');
                     heartRateElement.textContent = data.heart_rate;
@@ -199,12 +199,13 @@
                     const card = document.getElementById('sensor-data');
                     const additionalDataElement = document.getElementById('additional-data');
 
-                    // Check if data is in the correct format and readings are "optimal"
-                     // Example condition for "optimal"
-                        card.classList.add('correct-data');  // Apply green background
-                        additionalDataElement.textContent = 'Readings: optimal | Patient status: Normal';
-                        additionalDataElement.style.display = 'block';  // Show additional data
-                    
+                    // Apply green background and update additional data
+                    card.classList.add('correct-data');  // Apply green background
+                    additionalDataElement.textContent = 'Readings: optimal | Patient status: Normal';
+                    additionalDataElement.style.display = 'block';  // Show additional data
+                })
+                .catch(error => {
+                    console.error("Error fetching sensor data:", error);
                 });
         }, 30000);  // 30 seconds interval
     </script>
