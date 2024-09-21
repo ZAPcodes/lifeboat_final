@@ -188,26 +188,30 @@
         }
 
         setInterval(function() {
-            // Fetch the latest data via AJAX
-            fetch('https://edgelifeboat.onrender.com/receive-data/') // Adjust the endpoint if needed
-                .then(response => response.json())  // Parse response as JSON
-                .then(data => {
-                    // Update heart rate value
-                    const heartRateElement = document.getElementById('heart-rate');
-                    heartRateElement.textContent = data.heart_rate;
+    fetch('https://edgelifeboat.onrender.com/receive-data/') // Ensure this endpoint is correct
+        .then(response => response.json())
+        .then(data => {
+            // Check if the heart rate exists and is valid
+            if (data.heart_rate !== null && data.heart_rate !== undefined) {
+                const heartRateElement = document.getElementById('heart-rate');
+                heartRateElement.textContent = data.heart_rate;  // Display the heart rate
 
-                    const card = document.getElementById('sensor-data');
-                    const additionalDataElement = document.getElementById('additional-data');
+                const card = document.getElementById('sensor-data');
+                const additionalDataElement = document.getElementById('additional-data');
 
-                    // Apply green background and update additional data
-                    card.classList.add('correct-data');  // Apply green background
-                    additionalDataElement.textContent = 'Readings: optimal | Patient status: Normal';
-                    additionalDataElement.style.display = 'block';  // Show additional data
-                })
-                .catch(error => {
-                    console.error("Error fetching sensor data:", error);
-                });
-        }, 30000);  // 30 seconds interval
+                // Apply green background and update additional data
+                card.classList.add('correct-data');  // Apply green background
+                additionalDataElement.textContent = 'Readings: optimal | Patient status: Normal';
+                additionalDataElement.style.display = 'block';  // Show additional data
+            } else {
+                console.warn("Heart rate data is not available.");
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching sensor data:", error);
+        });
+}, 30000);  // 30 seconds interval
+
     </script>
 
 </body>
