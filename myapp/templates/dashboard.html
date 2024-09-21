@@ -103,6 +103,11 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
+        .card.correct-data {
+            background-color: #28a745; /* Green background for correct data */
+            color: white;
+        }
+
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
@@ -115,10 +120,18 @@
             text-align: center;
         }
 
+        .card.correct-data h2 {
+            color: white;  /* White text on green background */
+        }
+
         .card p {
             margin: 10px 0;
             font-size: 1.2rem;
             color: #555;
+        }
+
+        .card.correct-data p {
+            color: white;
         }
 
         .card p strong {
@@ -163,11 +176,8 @@
     <div class="container">
         <div id="sensor-data" class="card">
             <h2>Bhoomi Thakwani</h2>
-            {% if data %}
-            <p><strong>Heart Rate:</strong> {{ data.heart_rate }} bpm</p>
-            {% else %}
-            <p>No data available yet.</p>
-            {% endif %}
+            <p><strong>Heart Rate:</strong> <span id="heart-rate">Loading...</span> bpm</p>
+            <p id="additional-data" style="display: none;"></p> <!-- Hidden initially -->
         </div>
     </div>
 
@@ -180,12 +190,24 @@
         setInterval(function() {
             // Fetch the latest data via AJAX
             fetch(window.location.href)
-                .then(response => response.text())
-                .then(html => {
-                    // Replace the content inside the #sensor-data div with new data
-                    document.getElementById('sensor-data').innerHTML = new DOMParser()
-                        .parseFromString(html, 'text/html')
-                        .getElementById('sensor-data').innerHTML;
+                .then(response => response.json())  // Assuming the server returns JSON data
+                .then(data => {
+                    // Update heart rate value
+                    const heartRateElement = document.getElementById('heart-rate');
+                    heartRateElement.textContent = data.heart_rate;
+
+                    const card = document.getElementById('sensor-data');
+                    const additionalDataElement = document.getElementById('additional-data');
+
+                    // Check if data is in the correct format and readings are "optimal"
+                    if (data.heart_rate >= 60 && data.heart_rate <= 100) { // Example condition for "optimal"
+                        card.classList.add('correct-data');  // Apply green background
+                        additionalDataElement.textContent = 'Readings: optimal | Patient status: Normal';
+                        additionalDataElement.style.display = 'block';  // Show additional data
+                    } else {
+                        card.classList.remove('correct-data');  // Revert to default background
+                        additionalDataElement.style.display = 'none';  // Hide additional data
+                    }
                 });
         }, 30000);  // 30 seconds interval
     </script>
