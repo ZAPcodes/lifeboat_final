@@ -19,7 +19,11 @@ def receive_data(request):
             latest_heart_rate = heart_rate
 
             # Send a success response
-            return JsonResponse({'status': 'success', 'message': 'Heart rate data received'})
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Heart rate data received',
+                'heart_rate': latest_heart_rate  # Include heart rate in response
+            })
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
