@@ -188,7 +188,7 @@
         }
 
         setInterval(function() {
-    fetch('https://edgelifeboat.onrender.com/receive-data/') // Ensure this endpoint is correct
+    fetch('https://edgelifeboat.onrender.com/latest-data/') // Ensure this endpoint is correct
         .then(response => response.json())
         .then(data => {
             // Check if the heart rate exists and is valid

@@ -36,3 +36,10 @@ def display_data(request):
 
     # Render the data to the template
     return render(request, 'dashboard.html', {'data': sensor_data})
+
+def get_latest_data(request):
+    global latest_heart_rate
+    sensor_data = {
+        'heart_rate': latest_heart_rate,
+    }
+    return JsonResponse(sensor_data)
