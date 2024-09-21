@@ -190,8 +190,8 @@
         setInterval(function() {
             // Fetch the latest data via AJAX
             fetch(window.location.href)
-                .then(response => response.json())  // Assuming the server returns JSON data
-                .then(data => {
+                .then(response => response.text())  // Assuming the server returns JSON data
+                .then(html => {
                     // Update heart rate value
                     const heartRateElement = document.getElementById('heart-rate');
                     heartRateElement.textContent = data.heart_rate;
@@ -200,14 +200,11 @@
                     const additionalDataElement = document.getElementById('additional-data');
 
                     // Check if data is in the correct format and readings are "optimal"
-                    if (data.heart_rate >= 60 && data.heart_rate <= 100) { // Example condition for "optimal"
+                     // Example condition for "optimal"
                         card.classList.add('correct-data');  // Apply green background
                         additionalDataElement.textContent = 'Readings: optimal | Patient status: Normal';
                         additionalDataElement.style.display = 'block';  // Show additional data
-                    } else {
-                        card.classList.remove('correct-data');  // Revert to default background
-                        additionalDataElement.style.display = 'none';  // Hide additional data
-                    }
+                    
                 });
         }, 30000);  // 30 seconds interval
     </script>
