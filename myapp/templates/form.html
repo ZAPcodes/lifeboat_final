@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Health Form</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      function submitForm() {
+        // Get form values
+        const name = document.getElementById("name").value;
+        const age = document.getElementById("age").value;
+        const bmi = document.getElementById("bmi").value;
+        const bpSys = document.getElementById("bp-sys").value;
+        const bpDia = document.getElementById("bp-dia").value;
+        const gender = document.querySelector('input[name="gender"]:checked').value;
+
+        // Store values in local storage
+        localStorage.setItem("name", name);
+        localStorage.setItem("age", age);
+        localStorage.setItem("bmi", bmi);
+        localStorage.setItem("bpSys", bpSys);
+        localStorage.setItem("bpDia", bpDia);
+        localStorage.setItem("gender", gender);
+
+        // Redirect to the next page
+        window.location.href = "dashboard.html";  // Ensure this points to the correct file
+      }
+    </script>
+  </head>
+<body>
+  <div class="container">
+    <div class="title">Health Information</div>
+    <div class="content">
+      <form onsubmit="submitForm(); return false;"> <!-- Use JavaScript to handle form submission -->
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Name</span>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Age</span>
+            <input type="number" id="age" name="age" placeholder="Enter your age" required>
+          </div>
+          <div class="input-box">
+            <span class="details">BMI</span>
+            <input type="number" id="bmi" name="bmi" step="0.1" placeholder="Enter your BMI" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Blood Pressure (mmHg)</span>
+            <input type="number" id="bp-sys" name="bp-sys" placeholder="Systolic" required> /
+            <input type="number" id="bp-dia" name="bp-dia" placeholder="Diastolic" required>
+          </div>
+        </div>
+
+        <div class="gender-details">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <label for="male">
+              <input type="radio" id="male" name="gender" value="male" required>
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+            <label for="female">
+              <input type="radio" id="female" name="gender" value="female">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+            <label for="other">
+              <input type="radio" id="other" name="gender" value="other">
+              <span class="dot three"></span>
+              <span class="gender">Other</span>
+            </label>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Submit">
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

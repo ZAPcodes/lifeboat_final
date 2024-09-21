@@ -43,3 +43,8 @@ def get_latest_data(request):
         'heart_rate': latest_heart_rate,
     }
     return JsonResponse(sensor_data)
+
+def form(request):
+    return  render(request, 'form.html')
+
+
